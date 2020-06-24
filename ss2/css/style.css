@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* set width từ border vào */
+}
+.input-wrapper input{
+    width: 100%;
+    padding: 10px 13px;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.btn{
+}
+.erros{
+    color: red;
+}

@@ -1,0 +1,21 @@
+.item{
+    display: inline-block;
+    vertical-align: top;
+    width: 24%;
+    background-color: #a5a3a0;
+    word-spacing: 0px;
+}
+.container{
+    word-spacing: -3px;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+/* .container{
+    display: flex;
+}
+.item{
+    background-color: #bdbdbb;
+    width: 25%; 
+} */

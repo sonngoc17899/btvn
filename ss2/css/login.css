@@ -1,0 +1,39 @@
+.login-container{
+    background: url(../images/register-background.jpg);
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+}
+.login-container .login-form{
+    width: 400px;
+    height: 100vh;
+    background: #ffffff;
+    padding: 20px;
+}
+.login-form .login-title{
+    text-align: center;
+    font-size: 40px;
+    color: #757575;
+    font-family: sans-serif;
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+.login-form .input-wrapper{
+    margin-bottom: 10px;
+}
+.login-form .name-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+.login-form .submit-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+.login-form .btn{
+    background-color: blue;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 8px 18px;
+    border: 1px solid #ffffff;
+}
