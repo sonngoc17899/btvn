@@ -12,7 +12,7 @@ window.onload = () =>{
     // console.log(`Loaded`);
     // view.setActiveScreen(`welcomeScreen`); 
     console.log(firebase.app().name);
-    view.setActiveScreen(`registerScreen`);
+    // view.setActiveScreen(`registerScreen`);
     // view.setActiveScreen(`loginScreen`);
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
