@@ -33,3 +33,10 @@
 .name-wrapper .input-wrapper input{
     width: 98%;
 }
+.register-form .btn{
+    background-color: blue;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 8px 18px;
+    border: 1px solid #ffffff;
+}

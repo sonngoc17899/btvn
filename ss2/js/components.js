@@ -1,6 +1,6 @@
 const components = {}
 components.welcomeScreen = `
-    <div>Welcome to ChartApp</div>
+    <div id="welcome-user"></div>
 `
 components.registerScreen = `
 <div class="register-container">
