@@ -1,6 +1,19 @@
 const components = {}
-components.welcomeScreen = `
-    <div id="welcome-user"></div>
+components.chatScreen = `
+<div class="chat-container">
+<div class="chat-header">Mindx chat</div>
+<div class="main">
+    <div class="conversation-detail">
+        <div class="conversation-title">First conversation</div>
+        <div class="list-message">
+        </div>
+        <form id="sendMessageForm">
+            <input class="input" autocomplete="off" type="text" name="message" placeholder="Type a message">
+        <button class="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </form>
+    </div>
+</div> 
+</div>
 `
 components.registerScreen = `
 <div class="register-container">
@@ -57,3 +70,4 @@ components.loginScreen =  `
             </form>
         </div>
 </div>`
+

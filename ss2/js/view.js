@@ -36,12 +36,52 @@ view.setActiveScreen = (screenName) => {
         view.setActiveScreen(`registerScreen`);
       });
       break;
-    case `welcomeScreen`:
-      document.getElementById(`app`).innerHTML = components.welcomeScreen;
-      document.getElementById(`welcome-user`).innerText = `Welcome`+ ` `+ model.currentUser.displayName;
+    case `chatScreen`:
+      document.getElementById(`app`).innerHTML = components.chatScreen;
+      const sendMessageForm = document.querySelector(`#sendMessageForm`);
+      sendMessageForm.addEventListener(`submit`, (e) =>{
+        e.preventDefault();
+        const message = {
+          owner: model.currentUser.email,
+          content: sendMessageForm.message.value,
+          createdAt: new Date().toISOString()
+        }
+        const messageBot = {
+          owner: `bot`,
+          content: message.content,
+        }
+        if(sendMessageForm.message.value.trim() !== ``){
+        view.addMessage(message);
+      }
+      
+      sendMessageForm.message.value = ``;
+      model.updateMessages(message);
+      })
+      model.loadConversations();
       break;
   }
 };
 view.setErrosMessage = (elemntId, message) => {
   document.getElementById(elemntId).innerText = message;
 };
+view.addMessage = (message) => {
+  const messageWrapper = document.createElement(`div`);
+  messageWrapper.classList.add(`message`);
+  if(model.currentUser.email === message.owner){
+    messageWrapper.classList.add(`mine`);
+    messageWrapper.innerHTML = `<div class="content">${message.content}</div>`
+  }else{
+    messageWrapper.classList.add(`their`);
+    messageWrapper.innerHTML = `<div class="owner">${message.owner}</div>
+    <div class="content">${message.content}</div>`
+  }
+  const listMessage = document.querySelector(`.list-message`);
+  document.querySelector(`.list-message`).appendChild(messageWrapper);
+  listMessage.scrollTop = listMessage.scrollHeight;
+}
+view.showCurrentConversation = () =>{
+  for(let oneMessage of model.currentConversation.messages)
+  {
+    view.addMessage(oneMessage);
+  }
+}
