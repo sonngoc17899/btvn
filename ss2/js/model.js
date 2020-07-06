@@ -27,27 +27,41 @@ model.login = (email, password) =>{
         }else alert(`Please verify your email`);
     }).catch((error) =>{}) 
 }
-model.loadConversations = () =>{
-    firebase.firestore().collection(model.collectionName).get().then(res =>{
-        const data = utils.getDataFromDocs(res.docs)
-        if(data.length > 0){
-            model.currentConversation = data[0];
-            view.showCurrentConversation();        
-        }
-        console.log(data);
+model.loadConversations = () => {
+    firebase.firestore().collection(model.collectionName).where('users','array-contains', model.currentUser.email).get().then(res => {
+      const data = utils.getDataFromDocs(res.docs)
+      if (data.length > 0) {
+        model.currentConversation = data[0]
+        view.showCurrentConversation()
+      }
+      console.log(data)
     })
-    
-}
-model.updateMessages = (message)=>{
-    const docIdUpdate = `GzdJCKM1QCdEPc8KFAXU`;
-    const dataToUpDate = {
-        messages: firebase.firestore.FieldValue.arrayUnion(message)
-    }    
-    console.log(firebase.firestore.FieldValue.arrayUnion(message));
-    
-    // if(sendMessageForm.message.value.trim() !== ``){
-        firebase.firestore().collection('conversation').doc(model.currentConversation.id).update(message).then(res => {
-            alert('updated!')
-        })
-    // }
-}
+  }
+  model.addMessage = (message) => {
+    const dataToUpdate = {
+      messages: firebase.firestore.FieldValue.arrayUnion(message),
+    }
+    firebase.firestore()
+    .collection(model.collectionName)
+    .doc(model.currentConversation.id)
+    .update(dataToUpdate)
+  }
+  model.listenConversationsChange = () => {
+    firebase.firestore().collection(model.collectionName)
+    .where('users','array-contains', model.currentUser.email)
+    .onSnapshot((res) => {
+        // if(!firstRun){
+
+        // }
+      const docChanges = res.docChanges()
+      console.log(res)
+      for(oneChange of docChanges){
+          const type = oneChange.type;
+          const oneChangeData = utils.getDataFromDoc(oneChange.doc)
+          console.log(oneChangeData);
+          if(oneChangeData.id === model.currentConversation.id){
+              view.addMessage(oneChangeData.messages[oneChangeData.messages.length -1]);
+          }
+      }
+    })
+  }

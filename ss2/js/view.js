@@ -46,18 +46,13 @@ view.setActiveScreen = (screenName) => {
           content: sendMessageForm.message.value,
           createdAt: new Date().toISOString()
         }
-        const messageBot = {
-          owner: `bot`,
-          content: message.content,
-        }
         if(sendMessageForm.message.value.trim() !== ``){
-        view.addMessage(message);
+          model.addMessage(message);
       }
-      
       sendMessageForm.message.value = ``;
-      model.updateMessages(message);
       })
       model.loadConversations();
+      model.listenConversationsChange();
       break;
   }
 };

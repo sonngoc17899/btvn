@@ -67,6 +67,7 @@
 .message.mine{
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 5px;
 }
 .chat-container .message.mine .content{
     background: #027bfd;
