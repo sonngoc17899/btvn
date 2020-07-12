@@ -15,18 +15,23 @@ window.onload = () =>{
     // console.log(firebase.app().name);
     // view.setActiveScreen(`registerScreen`);
     // view.setActiveScreen(`loginScreen`);
-    firebase.auth().onAuthStateChanged(function(user) {
-        if (user.emailVerified) {
+    firebase.auth().onAuthStateChanged((user) => {
+        // console.log(user)
+        if(user) {
+          if (user.emailVerified) {
             model.currentUser = {
-                displayName: user.displayName,
-                email: user.email,
+              displayName: user.displayName,
+              email: user.email
             }
-            view.setActiveScreen(`chatScreen`);
+            view.setActiveScreen('chatScreen')
+          } else {
+            view.setActiveScreen('loginScreen')
+            alert('Please verify your email')
+          }
         } else {
-            view.setActiveScreen(`loginScreen`);
-            alert(`Mời bạn đăng nhập`);
+          view.setActiveScreen('loginScreen')
         }
-    });
+      })
 // templateQueryDataBase();
 }
 
