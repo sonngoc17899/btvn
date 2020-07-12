@@ -41,6 +41,7 @@ model.loadConversations = () => {
       {
         view.addUsers(user);
       }
+      view.showTitle(data[0].title);
       console.log(data)
     })
   }
