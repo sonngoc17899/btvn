@@ -1,18 +1,34 @@
 const components = {}
 components.chatScreen = `
+<div class="header">
+  MindX chat
+</div>
 <div class="chat-container">
-<div class="chat-header">Mindx chat</div>
+<div class="aside-left">
+  <div class="new-conversation">
+    <button class="btn" id="new-conversation">+ New conversation</button>
+  </div>
+  <div class="list-conversations">
+  </div>
+</div>
 <div class="main">
-    <div class="conversation-detail">
-        <div class="conversation-title">First conversation</div>
-        <div class="list-message">
-        </div>
-        <form id="sendMessageForm">
-            <input class="input" autocomplete="off" type="text" name="message" placeholder="Type a message">
-        <button class="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-        </form>
+  <div class="conversation-detail">
+    <div id="conversation-title">First conversation</div>
+    <div class="list-message">
     </div>
-</div> 
+    <form id="sendMessageForm">
+      <input class="input" autocomplete="off" type="text" name="message" placeholder="Type a message...">
+      <button class="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+    </form>
+</div>
+</div>
+<div class="aside-right">
+    <div class="list-users"></div>
+    <form id="add-email">
+    <input class="input" autocomplete="off" type="text" placeholder="Email">
+    <button class="btn" type="submit">Thêm</button>
+    </form>
+</div>
 </div>
 `
 components.registerScreen = `
@@ -70,4 +86,27 @@ components.loginScreen =  `
             </form>
         </div>
 </div>`
-
+components.createConversationScreen = `
+<div class="create-conversation-wrapper">
+        <div class="header">
+            <div class="title">Techkids Chat</div>
+        </div>
+        <div class="main">
+        <h3 class="mb-1rem">Creat a new conversation</h3>
+            <form id="create-conversation-form">
+                <div class="input-wrapper">
+                    <input type="text" name="title" placeholder="Conversation name">
+                    <div class="erros" id="erros-conversationName"></div>
+                </div>
+                <div class="input-wrapper"> 
+                    <input type="text" name="email" placeholder="Friend email">
+                    <div class="erros" id="erros-friendEmail"></div>
+                </div>
+            <div class="button-wrapper">
+                <button class="btn" type="submit">Save</button>
+                <button type="button" id="back-to-chat">Cancel</button>
+            </div>
+            </form>
+        </div>
+</div>
+`

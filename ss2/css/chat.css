@@ -1,75 +1,102 @@
 .chat-container{
-    font-family: sans-serif;
-    height: 100vh;
+  font-family: sans-serif;
+  height: calc(100vh - 64px);
+  display: flex;
 }
-.chat-container .chat-header{
-    background: #3a7fcf;
-    color: #ffffff;
-    text-align: center;
-    height: 64px;
-    font-size: 24px;
-    line-height: 64px;
-}
+
 .chat-container .main{
-    height: calc(100% - 64px);
+  height: 100%;
+  flex-grow: 1;
 }
-.conversation-title{
-    height: 64px;
-    color: #333;
-    text-align: center;
-    height: 64px;
-    font-size: 24px;
-    line-height: 64px;
-    border-bottom: 1px solid #dbdbdb;
+.chat-container .main #conversation-title{
+  height: 64px;
+  line-height: 64px;
+  border-bottom: 1px solid #dbdbdb;
+  text-align: center;
+  font-size: 24px;
+  color: #333;
 }
-.chat-container .conversation-detail{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+.chat-container .conversation-detail {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.chat-container .conversation-detail .list-message{
-    flex-grow: 1;
+.chat-container .conversation-detail .list-message {
+  flex-grow: 1;
 }
-#sendMessageForm{
-    height: 64px;
-    border-top: 1px solid #bdbdbd;
-    display: flex;
-    line-height: 64px;
+#sendMessageForm {
+  height: 64px;
+  line-height: 64px;
+  border-top: 1px solid #dbdbdb;
+  display: flex;
 }
-#sendMessageForm input{
-    border: none;
-    flex-grow: 1;
-    padding-left: 20px;
-    outline: 0;
+#sendMessageForm input {
+  border: none;
+  flex-grow: 1;
+  padding-left: 20px;
+  outline: 0;
 }
 #sendMessageForm button{
-    background: none;
-    color: #2196F3;
-    font-size: 24px;
-    border: none;
-    outline: 0;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #027bfd;
 }
 .chat-container .list-message{
-    padding: 10px;
-    overflow-y: scroll;
+  padding: 10px;
+  overflow-y: auto;
 }
 .chat-container .list-message .content{
-    background: #bdbdbd;
-    max-width: 40%;
-    padding: 10px;
-    border-radius: 10px;
-    word-break: break-word;
-    width: max-content;
+  border-radius: 10px;
+  max-width: 40%;
+  word-break: break-word;
+  padding: 10px;
+  width: max-content;
 }
-.chat-container .message.thier .content{
-    background: #dbdbdb;
-}
-.message.mine{
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 5px;
+.chat-container .message.their .content{
+  background: #dbdbdb;
 }
 .chat-container .message.mine .content{
-    background: #027bfd;
-    color: #ffffff;
+  background: #027bfd;
+  color: #fff;
+}
+.chat-container .message.mine{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+.chat-container .aside-left{
+  border-right: 1px solid #dbdbdb;
+  font-size: 14px;
+  width: 15%;
+}
+.chat-container .aside-right{
+  border-left: 1px solid #dbdbdb;
+  font-size: 14px;
+  width: 15%;
+}
+.chat-container .aside-left .new-conversation {
+  height: 64px;
+  border-bottom: 1px solid #dbdbdb;
+  line-height: 64px;
+  text-align: center;
+}
+.chat-container .conversation{
+  padding: 10px;
+}
+.chat-container .conversation.current{
+  background: #dbdbdb;
+}
+.chat-container .list-users{
+  padding: 10px;
+}
+.chat-container #add-email{
+  padding: 10px;
+}
+.chat-container .input{
+  width: 90%;
+  padding: 10px 13px;
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }

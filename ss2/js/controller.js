@@ -43,3 +43,15 @@ controller.login = (loginInfo) => {
   } else view.setErrosMessage(`erros-password-name`, ``);
   model.login(loginInfo.email, loginInfo.password);
 };
+controller.createConversation = ({ title, friendEmail }) =>{
+  view.setErrosMessage(`erros-conversationName`, title ===`` ? `Please input title` : ``)
+  view.setErrosMessage(`erros-friendEmail`, friendEmail ===`` ? `Please input friend email` : ``);
+  if(title !== `` && friendEmail !== ``){
+    model.createConversation({
+      title,
+      users: [friendEmail, model.currentUser.email],
+      creatAt: new Date().toISOString(),
+      message: []
+    })
+  }
+}

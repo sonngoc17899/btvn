@@ -10,11 +10,11 @@ window.onload = () =>{
         measurementId: "G-6QVJ7P8V9E"
       };
     firebase.initializeApp(firebaseConfig);
-    console.log(`Loaded`);
-    view.setActiveScreen(`welcomeScreen`); 
-    console.log(firebase.app().name);
-    view.setActiveScreen(`registerScreen`);
-    view.setActiveScreen(`loginScreen`);
+    // console.log(`Loaded`);
+    // view.setActiveScreen(`chatScreen`); 
+    // console.log(firebase.app().name);
+    // view.setActiveScreen(`registerScreen`);
+    // view.setActiveScreen(`loginScreen`);
     firebase.auth().onAuthStateChanged(function(user) {
         if (user.emailVerified) {
             model.currentUser = {
