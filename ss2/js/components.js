@@ -13,7 +13,7 @@ components.chatScreen = `
 </div>
 <div class="main">
   <div class="conversation-detail">
-    <div id="conversation-title">First conversation</div>
+    <div id="conversation-title"></div>
     <div class="list-message">
     </div>
     <form id="sendMessageForm">
@@ -24,9 +24,13 @@ components.chatScreen = `
 </div>
 <div class="aside-right">
     <div class="list-users"></div>
-    <form id="add-email">
-    <input class="input" autocomplete="off" type="text" placeholder="Email">
-    <button class="btn" type="submit">Thêm</button>
+    <form id="addUser">
+    <div class="input-wrapper">
+    <input class="input" name="email" type="text" placeholder="Email">
+    <div class="erros" id="add-user-email-erros"></div>
+    <div class="erros" id="add-user-email-erros1"></div>
+    </div>
+    <button class="btn" type="submit">Add</button>
     </form>
 </div>
 </div>
@@ -101,6 +105,7 @@ components.createConversationScreen = `
                 <div class="input-wrapper"> 
                     <input type="text" name="email" placeholder="Friend email">
                     <div class="erros" id="erros-friendEmail"></div>
+                    <div class="erros" id="erros-friendEmail1"></div>
                 </div>
             <div class="button-wrapper">
                 <button class="btn" type="submit">Save</button>

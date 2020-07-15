@@ -54,6 +54,15 @@ view.setActiveScreen = (screenName) => {
        document.getElementById(`new-conversation`).addEventListener(`click`, ()=>{
        view.setActiveScreen(`createConversationScreen`);
      })
+      const addUsersForm = document.querySelector(`#addUser`);
+      addUsersForm.addEventListener(`submit`, (e)=>{
+        e.preventDefault();
+        controller.addUser(addUsersForm.email.value);
+        addUsersForm.email.value = ``;
+      })
+      document.querySelector(`#addUser input`).addEventListener(`click`, ()=>{
+        document.getElementById(model.currentConversation.id).lastElementChild.style = `display: none`;
+      })
       model.loadConversations();
       model.listenConversationsChange();
       break;
@@ -92,9 +101,17 @@ view.backToChatScreen = () =>{
   document.getElementById(`new-conversation`).addEventListener(`click`, ()=>{
     view.setActiveScreen(`createConversationScreen`);
   })
- view.showConversation();
- view.showCurrentConversation();
- view.showUser();
+ const addUsersForm = document.querySelector(`#addUser`);
+ addUsersForm.addEventListener(`submit`, (e)=>{
+  e.preventDefault();
+  controller.addUser(addUsersForm.email.value);
+  addUsersForm.email.value = ``;
+})
+document.querySelector(`#addUser input`).addEventListener(`click`, ()=>{
+  document.getElementById(model.currentConversation.id).lastElementChild.style = `display: none`;
+})
+view.showConversation();
+view.showCurrentConversation();
 }
 view.setErrosMessage = (elementId, message) => {
   document.getElementById(elementId).innerText = message;
@@ -120,6 +137,8 @@ view.showCurrentConversation = () =>{
   {
     view.addMessage(oneMessage);
   }
+  view.showUser();
+  view.showTitle(model.currentConversation.title);
 }
 view.showConversation = () =>{
   for(oneConversation of model.conversations){
@@ -129,6 +148,7 @@ view.showConversation = () =>{
 view.addConversations = (conversation) =>{
   const conversationWrapper = document.createElement('div');
   conversationWrapper.classList.add('conversation');
+  conversationWrapper.id = conversation.id;
   if(conversation.id === model.currentConversation.id)
   {
     conversationWrapper.classList.add('current')
@@ -136,17 +156,19 @@ view.addConversations = (conversation) =>{
   conversationWrapper.innerHTML = `
   <div class="conversation-title">${conversation.title}</div>
   <div class="conversation-num-users">${conversation.users.length} users</div>
+  <div class="conversation-notify"></div>
   `
   conversationWrapper.addEventListener(`click`, ()=>{
     document.querySelector(`.current`).classList.remove(`current`);
     conversationWrapper.classList.add(`current`);
     model.changeCurrentConversation(conversation.id);
+    conversationWrapper.lastElementChild.style = `display: none`;
   })
   document.querySelector(`.list-conversations`).appendChild(conversationWrapper);
 }
 view.showTitle = (title) =>{
   document.getElementById(`conversation-title`).innerText = ``;
-  document.getElementById(`conversation-title`).innerText = `${title}`
+  document.getElementById(`conversation-title`).innerText = `${title}`;
 }
 view.addUsers = (user) =>{
   const userWrapper = document.createElement(`div`);
@@ -156,9 +178,14 @@ view.addUsers = (user) =>{
 }
 view.showUser = () =>{
 document.querySelector(`.list-users`).innerHTML = ``;
-for(user of conversation.users)
-{
+for(user of model.currentConversation.users)
+  {
   view.addUsers(user);
+  }
 }
+view.showNotify = (conversationId) =>{
+  const conversation = document.getElementById(conversationId);
+  conversation.lastElementChild.style = `display: block`;
 }
+
 

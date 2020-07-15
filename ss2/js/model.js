@@ -24,7 +24,7 @@ model.login = (email, password) =>{
                 displayName: user.user.displayName,
                 email: user.user.email,
             }
-            view.setActiveScreen(`chatScreen`);
+            // view.setActiveScreen(`chatScreen`);
         }else alert(`Please verify your email`);
     }).catch((error) =>{}) 
 }
@@ -37,10 +37,11 @@ model.loadConversations = () => {
         view.showCurrentConversation();
       }
       view.showConversation()
-      for(user of data[0].users)
-      {
-        view.addUsers(user);
-      }
+      // for(user of data[0].users)
+      // {
+      //   view.addUsers(user);
+      // }
+      view.showTitle(data[0].title);
       console.log(data)
     })
   }
@@ -70,18 +71,23 @@ model.loadConversations = () => {
       console.log(oneChangeData)
       if(type === 'modified') {
         if (oneChangeData.id === model.currentConversation.id) {
-          model.currentConversation = oneChangeData
-          view.addMessage(oneChangeData.messages[oneChangeData.messages.length - 1])
+          
+          if(oneChangeData.users.length === model.currentConversation.users.length){
+            view.addMessage(oneChangeData.messages[oneChangeData.messages.length - 1])
+          } else view.addUsers(oneChangeData.users[oneChangeData.users.length - 1])
         }
+        model.currentConversation = oneChangeData
         for(let i = 0; i < model.conversations.length; i++) {
           const element = model.conversations[i]
           if(element.id === oneChangeData.id){
             model.conversations[i] = oneChangeData
+            view.showNotify(oneChangeData.id);
           }
         }
       } else if(type === 'added') {
         model.conversations.push(oneChangeData)  
         view.addConversations(oneChangeData)
+        view.showNotify(oneChangeData.id)
       }
     }
   })
@@ -94,12 +100,12 @@ model.changeCurrentConversation = (conversationId) =>{
       view.showCurrentConversation();
       view.showTitle(conversation.title);
     }
-    for(let i=0;i<conversation.users.length;i++)
-    {
-      if (conversation.id === conversationId) {
-        view.addUsers(conversation.users[i])
-      }
-    }
+    // for(let i=0;i<conversation.users.length;i++)
+    // {
+    //   if (conversation.id === conversationId) {
+    //     view.addUsers(conversation.users[i])
+    //   }
+    // }
   }
   // model.currentConversation = conversation
   // .filter(item => item.id === conversationId)[0]
@@ -111,4 +117,11 @@ model.createConversation = (conversation) =>{
   console.log(conversation);
   firebase.firestore().collection(model.collectionName).add(conversation);
   view.backToChatScreen();
+}
+model.addUser = (email) =>{
+  const dataToUpdate = {
+    users: firebase.firestore.FieldValue.arrayUnion(email)
+  }
+  firebase.firestore().collection(model.collectionName)
+  .doc(model.currentConversation.id).update(dataToUpdate);
 }
