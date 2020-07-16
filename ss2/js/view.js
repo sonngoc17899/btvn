@@ -141,12 +141,14 @@ view.showCurrentConversation = () =>{
   view.showTitle(model.currentConversation.title);
 }
 view.showConversation = () =>{
+  // document.getElementById(`.list-conversations`).querySelector(`div`) = ``;
   for(oneConversation of model.conversations){
     view.addConversations(oneConversation);
   }
 }
 view.addConversations = (conversation) =>{
   const conversationWrapper = document.createElement('div');
+  const newConversation = document.getElementById(`new-conversation`);
   conversationWrapper.classList.add('conversation');
   conversationWrapper.id = conversation.id;
   if(conversation.id === model.currentConversation.id)
@@ -158,6 +160,21 @@ view.addConversations = (conversation) =>{
   <div class="conversation-num-users">${conversation.users.length} users</div>
   <div class="conversation-notify"></div>
   `
+  const mediaQuery = window.matchMedia(`screen and (max-width: 768px)`);
+  if(mediaQuery.matches){
+    conversationWrapper.firstElementChild.innerText = conversation.title.charAt(0);
+    newConversation.innerHTML = `+`;
+  }
+  mediaQuery.addListener((mediaMatch) =>{
+    if(mediaMatch.matches){
+      conversationWrapper.firstElementChild.innerText = conversation.title.charAt(0);
+      newConversation.innerHTML = `+`;
+    }
+    else {
+          conversationWrapper.firstElementChild.innerText = conversation.title;
+          newConversation.innerHTML = `+ New conversation`;
+    }
+  })
   conversationWrapper.addEventListener(`click`, ()=>{
     document.querySelector(`.current`).classList.remove(`current`);
     conversationWrapper.classList.add(`current`);

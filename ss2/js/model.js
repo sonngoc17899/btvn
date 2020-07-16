@@ -24,7 +24,7 @@ model.login = (email, password) =>{
                 displayName: user.user.displayName,
                 email: user.user.email,
             }
-            // view.setActiveScreen(`chatScreen`);
+            view.setActiveScreen(`chatScreen`);
         }else alert(`Please verify your email`);
     }).catch((error) =>{}) 
 }
@@ -37,17 +37,17 @@ model.loadConversations = () => {
         view.showCurrentConversation();
       }
       view.showConversation()
-<<<<<<< HEAD
+
       // for(user of data[0].users)
       // {
       //   view.addUsers(user);
       // }
-=======
+
       for(user of data[0].users)
       {
         view.addUsers(user);
       }
->>>>>>> 52dffba7cc13ddbd8802338f39e75a14fbb9e504
+
       view.showTitle(data[0].title);
       console.log(data)
     })
@@ -125,7 +125,6 @@ model.createConversation = (conversation) =>{
   firebase.firestore().collection(model.collectionName).add(conversation);
   view.backToChatScreen();
 }
-<<<<<<< HEAD
 model.addUser = (email) =>{
   const dataToUpdate = {
     users: firebase.firestore.FieldValue.arrayUnion(email)
@@ -133,5 +132,4 @@ model.addUser = (email) =>{
   firebase.firestore().collection(model.collectionName)
   .doc(model.currentConversation.id).update(dataToUpdate);
 }
-=======
->>>>>>> 52dffba7cc13ddbd8802338f39e75a14fbb9e504
+
